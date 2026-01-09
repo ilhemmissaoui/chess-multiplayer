@@ -12,18 +12,18 @@ Application d'échecs multijoueur en temps réel.
 
 - Java 21+
 - Node.js 22+
-- PostgreSQL 15+ (ou Docker)
+- PostgreSQL 15+
 
 ### Base de données
 
 # PostgreSQL local
 
+```
 sudo -u postgres psql
 CREATE DATABASE chess_db;
 CREATE USER chess WITH PASSWORD 'chess';
 GRANT ALL PRIVILEGES ON DATABASE chess_db TO chess;
-
-````
+```
 
 ### Lancement
 
@@ -32,7 +32,7 @@ GRANT ALL PRIVILEGES ON DATABASE chess_db TO chess;
 ```bash
 cd backend
 ./mvnw spring-boot:run
-````
+```
 
 **Frontend**
 
