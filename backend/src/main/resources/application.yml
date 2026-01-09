@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: chess-multiplayer
+
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chess_db
+    username: chess
+    password: chess123
+    driver-class-name: org.postgresql.Driver
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # H2 Console (for development)
+  h2:
+    console:
+      enabled: false
+
+server:
+  port: 8080
+
+# JWT Configuration
+jwt:
+  secret: Y2hlc3MtbXVsdGlwbGF5ZXItc2VjcmV0LWtleS10aGF0LXNob3VsZC1iZS1hdC1sZWFzdC0yNTYtYml0cy1sb25nLWZvci1zZWN1cml0eQ==
+  expiration: 86400000 # 24 hours in milliseconds
+
+# Logging
+logging:
+  level:
+    com.chess: DEBUG
+    org.springframework.web.socket: DEBUG
+    org.springframework.messaging: DEBUG
+
+---
+# Development profile with H2
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:h2:mem:chess_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
